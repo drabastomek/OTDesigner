@@ -62,23 +62,23 @@ class View(tk.Toplevel):
         self.add_BobbinInput(self.bobbinFrame)
         self.bobbinFrame.grid(column=0, row=0)
         
-        # add bobbin dimensions image
-        self.bobbinImageCanvas = tk.Canvas(self, 
-            height=250, width=250)
-        # >>> add the image here!!! <<<
-        self.bobbinImageCanvas.grid(column=1, row=0)
+        # # add bobbin dimensions image
+        # self.bobbinImageCanvas = tk.Canvas(self, 
+        #     height=250, width=250)
+        # # >>> add the image here!!! <<<
+        # self.bobbinImageCanvas.grid(column=1, row=0)
 
-        # add windings data
-        self.windingsFrame = tk.LabelFrame(self,
-            text='Winding parameters')
-        self.add_WindingsInput(self.windingsFrame)
-        self.windingsFrame.grid(column=0, row=1, columnspan=2)
+        # # add windings data
+        # self.windingsFrame = tk.LabelFrame(self,
+        #     text='Winding parameters')
+        # self.add_WindingsInput(self.windingsFrame)
+        # self.windingsFrame.grid(column=0, row=1, columnspan=2)
 
-        self.windings_button = tk.Button(self.windingsFrame,
-            text=u"Click me!"
-            , command=self.add_Winding
-            )
-        self.windings_button.grid(column=0,row=4, columnspan=4)
+        # self.windings_button = tk.Button(self.windingsFrame,
+        #     text=u"Click me!"
+        #     , command=self.add_Winding
+        #     )
+        # self.windings_button.grid(column=0,row=4, columnspan=4)
 
         
     def add_BobbinInput(self, frame):
