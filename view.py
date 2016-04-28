@@ -8,22 +8,20 @@ class Winding(object):
         self.widgets = []
 
     def add_winding(self, frame, row):
-        # self.name = name
-
-        variable = tk.StringVar()
+        # variable = tk.StringVar()
         label = tk.Entry(frame, width=10,
-            textvariable=variable,
+            # textvariable=variable,
             justify='center')
         label.grid(column=0, row=row)
 
         for i, param in enumerate(self.listOfParams[1:]):
-            variable = tk.IntVar()
+            # variable = tk.IntVar()
             entry = tk.Entry(frame, width=10, 
-                textvariable=variable, 
+                # textvariable=variable, 
                 justify='right')
             entry.grid(column=i+1, row=row)
 
-            self.widgets.append((variable, entry))
+            self.widgets.append(entry)
 
     def add_named_winding(self, frame, name, row):
         self.name = name
@@ -33,19 +31,20 @@ class Winding(object):
         label.grid(column=0, row=row)
 
         for i, param in enumerate(self.listOfParams[1:]):
-            variable = tk.IntVar()
+            # variable = tk.IntVar()
             entry = tk.Entry(frame, width=10, 
-                textvariable=variable, 
+                # textvariable=variable, 
                 justify='right')
             entry.grid(column=i+1, row=row)
 
-            self.widgets.append((variable, entry))
+            # self.widgets.append((variable, entry))
+            self.widgets.append(entry)
 
     def get_values(self):
         vals = []
 
         for widget in self.widgets:
-            print()
+            print(widget)
 
 
 class View(tk.Toplevel):
