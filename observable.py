@@ -1,7 +1,8 @@
 import tkinter as tk
 
 class Observable:
-    def __init__(self, initialValue=None):
+    def __init__(self, key=None, initialValue=None):
+        self.key = key
         self.data = initialValue
         self.callbacks = {}
 
@@ -13,7 +14,7 @@ class Observable:
 
     def _docallbacks(self):
         for func in self.callbacks:
-             func(self.data)
+             func(self.key, self.data)
 
     def set(self, data):
         self.data = data

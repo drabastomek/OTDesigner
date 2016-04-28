@@ -80,25 +80,28 @@ class View(tk.Toplevel):
         #     )
         # self.windings_button.grid(column=0,row=4, columnspan=4)
 
-        
+    def set_bobbinInput(self, key, value):
+        self.bobbin_width_input.delete(0,'end')
+        self.bobbin_width_input.insert('end', str(value))  
+
     def add_BobbinInput(self, frame):
         # width
         bobbin_width_label = tk.Label(frame, text='Width:')
         bobbin_width_label.grid(column=0, row=1, sticky='ew')
 
-        bobbin_width_inputVar = tk.IntVar()
-        bobbin_width_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_width_inputVar, 
+        # bobbin_width_inputVar = tk.IntVar()
+        self.bobbin_width_input = tk.Entry(frame, width=11, 
+            # textvariable=bobbin_width_inputVar, 
             justify='right')
-        bobbin_width_input.grid(column=1, row=1)
+        self.bobbin_width_input.grid(column=1, row=1)
 
         # height
         bobbin_height_label = tk.Label(frame, text='Height:')
         bobbin_height_label.grid(column=0, row=2)
 
-        bobbin_height_inputVar = tk.IntVar()
+        # bobbin_height_inputVar = tk.IntVar()
         bobbin_height_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_height_inputVar, 
+            # textvariable=bobbin_height_inputVar, 
             justify='right')
         bobbin_height_input.grid(column=1, row=2)
 
@@ -106,9 +109,9 @@ class View(tk.Toplevel):
         bobbin_depth_label = tk.Label(frame, text='Depth:')
         bobbin_depth_label.grid(column=0, row=3)
 
-        bobbin_depth_inputVar = tk.IntVar()
+        # bobbin_depth_inputVar = tk.IntVar()
         bobbin_depth_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_depth_inputVar, 
+            # textvariable=bobbin_depth_inputVar, 
             justify='right')
         bobbin_depth_input.grid(column=1, row=3)
 
@@ -116,9 +119,9 @@ class View(tk.Toplevel):
         bobbin_lip_label = tk.Label(frame, text='Lip:')
         bobbin_lip_label.grid(column=0, row=4)
 
-        bobbin_lip_inputVar = tk.IntVar()
+        # bobbin_lip_inputVar = tk.IntVar()
         bobbin_lip_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_lip_inputVar, 
+            # textvariable=bobbin_lip_inputVar, 
             justify='right')
         bobbin_lip_input.grid(column=1, row=4)
 
@@ -126,14 +129,18 @@ class View(tk.Toplevel):
         bobbin_unit_label = tk.Label(frame, text='Units:')
         bobbin_unit_label.grid(column=0, row=5)
 
-        bobbin_unit_inputVar = tk.IntVar()
+        # bobbin_unit_inputVar = tk.IntVar()
         bobbin_unit_input = ttk.Combobox(frame, width=8, 
-            textvariable=bobbin_unit_inputVar, 
+            # textvariable=bobbin_unit_inputVar, 
             values=['in.','mm.'],
             state='readonly')
         bobbin_unit_input.grid(column=1, row=5)
 
         bobbin_unit_input.set('in.')
+
+        self.checkButton = tk.Button(self, text='Check',
+            width=8)
+        self.checkButton.grid(column=0, row=6)
 
     def add_WindingsInput(self, frame):
 
