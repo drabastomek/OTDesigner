@@ -1,50 +1,43 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 
-class Winding(object):
-    def __init__(self):
-        self.name = None
-        self.listOfParams = ['Name', 'Turns', 'Layers', 'AWG']
-        self.widgets = []
+# class Winding(object):
+#     def __init__(self):
+#         self.name = None
+#         self.listOfParams = ['name', 'turns', 'layers', 'awg']
+#         self.widgets = []
 
-    def add_winding(self, frame, row):
-        # variable = tk.StringVar()
-        label = tk.Entry(frame, width=10,
-            # textvariable=variable,
-            justify='center')
-        label.grid(column=0, row=row)
+#     def add_winding(self, frame, row):
+#         label = tk.Entry(frame, width=10,
+#             justify='center')
+#         label.grid(column=0, row=row)
 
-        for i, param in enumerate(self.listOfParams[1:]):
-            # variable = tk.IntVar()
-            entry = tk.Entry(frame, width=10, 
-                # textvariable=variable, 
-                justify='right')
-            entry.grid(column=i+1, row=row)
+#         for i, param in enumerate(self.listOfParams[1:]):
+#             entry = tk.Entry(frame, width=10, 
+#                 justify='right')
+#             entry.grid(column=i+1, row=row)
 
-            self.widgets.append(entry)
+#             self.widgets.append(entry)
 
-    def add_named_winding(self, frame, name, row):
-        self.name = name
+#     def add_named_winding(self, frame, name, row):
+#         self.name = name
 
-        label = tk.Label(frame, text=name,
-            width=10)
-        label.grid(column=0, row=row)
+#         label = tk.Label(frame, text=name,
+#             width=10)
+#         label.grid(column=0, row=row)
 
-        for i, param in enumerate(self.listOfParams[1:]):
-            # variable = tk.IntVar()
-            entry = tk.Entry(frame, width=10, 
-                # textvariable=variable, 
-                justify='right')
-            entry.grid(column=i+1, row=row)
+#         for i, param in enumerate(self.listOfParams[1:]):
+#             entry = tk.Entry(frame, width=10, 
+#                 justify='right')
+#             entry.grid(column=i+1, row=row)
 
-            # self.widgets.append((variable, entry))
-            self.widgets.append(entry)
+#             self.widgets.append(entry)
 
-    def get_values(self):
-        vals = []
+#     def get_values(self):
+#         vals = []
 
-        for widget in self.widgets:
-            print(widget)
+#         for widget in self.widgets:
+#             print(widget)
 
 
 class View(tk.Toplevel):
@@ -52,7 +45,16 @@ class View(tk.Toplevel):
         tk.Toplevel.__init__(self, master)
         self.protocol('WM_DELETE_WINDOW', self.master.destroy)
 
-        self.windings = []
+        self.bobbinKeys = ['width', 'height', 'depth', 'lip']
+
+        self.view_Bobbin = {            
+            'width': None, 
+            'height': None, 
+            'depth': None, 
+            'lip': None,
+            'units': None
+        }
+        self.view_Windings = []
 
         self.grid()
 
@@ -62,80 +64,52 @@ class View(tk.Toplevel):
         self.add_BobbinInput(self.bobbinFrame)
         self.bobbinFrame.grid(column=0, row=0)
         
-        # # add bobbin dimensions image
-        # self.bobbinImageCanvas = tk.Canvas(self, 
-        #     height=250, width=250)
-        # # >>> add the image here!!! <<<
-        # self.bobbinImageCanvas.grid(column=1, row=0)
+        # add bobbin dimensions image
+        self.bobbinImageCanvas = tk.Canvas(self, 
+            height=250, width=250)
+        # >>> add the image here!!! <<<
+        self.bobbinImageCanvas.grid(column=1, row=0)
 
-        # # add windings data
-        # self.windingsFrame = tk.LabelFrame(self,
-        #     text='Winding parameters')
-        # self.add_WindingsInput(self.windingsFrame)
-        # self.windingsFrame.grid(column=0, row=1, columnspan=2)
+        # add windings data
+        self.windingsFrame = tk.LabelFrame(self,
+            text='Winding parameters')
+        self.add_WindingsHeader(self.windingsFrame)
+        self.windingsFrame.grid(column=0, row=1, columnspan=2)
 
-        # self.windings_button = tk.Button(self.windingsFrame,
-        #     text=u"Click me!"
-        #     , command=self.add_Winding
-        #     )
-        # self.windings_button.grid(column=0,row=4, columnspan=4)
+        self.windings_button = tk.Button(self,
+            text=u"Add winding")
+        self.windings_button.grid(column=0,row=10, columnspan=4)
 
-        
+    def set_BobbinInput(self, key, value):
+        self.view_Bobbin[key].delete(0,'end')
+        self.view_Bobbin[key].insert('end', str(value))  
+
     def add_BobbinInput(self, frame):
-        # width
-        bobbin_width_label = tk.Label(frame, text='Width:')
-        bobbin_width_label.grid(column=0, row=1, sticky='ew')
+        for i, key in enumerate(self.bobbinKeys):
+            label = tk.Label(frame, text=key)
+            label.grid(column=0, row=i, sticky='ew')
 
-        bobbin_width_inputVar = tk.IntVar()
-        bobbin_width_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_width_inputVar, 
-            justify='right')
-        bobbin_width_input.grid(column=1, row=1)
-
-        # height
-        bobbin_height_label = tk.Label(frame, text='Height:')
-        bobbin_height_label.grid(column=0, row=2)
-
-        bobbin_height_inputVar = tk.IntVar()
-        bobbin_height_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_height_inputVar, 
-            justify='right')
-        bobbin_height_input.grid(column=1, row=2)
-
-        # depth
-        bobbin_depth_label = tk.Label(frame, text='Depth:')
-        bobbin_depth_label.grid(column=0, row=3)
-
-        bobbin_depth_inputVar = tk.IntVar()
-        bobbin_depth_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_depth_inputVar, 
-            justify='right')
-        bobbin_depth_input.grid(column=1, row=3)
-
-        # lip
-        bobbin_lip_label = tk.Label(frame, text='Lip:')
-        bobbin_lip_label.grid(column=0, row=4)
-
-        bobbin_lip_inputVar = tk.IntVar()
-        bobbin_lip_input = tk.Entry(frame, width=11, 
-            textvariable=bobbin_lip_inputVar, 
-            justify='right')
-        bobbin_lip_input.grid(column=1, row=4)
+            self.view_Bobbin[key] = \
+                tk.Entry(frame, width=11, 
+                justify='right')
+            self.view_Bobbin[key].grid(column=1, row=i)
 
         # units
-        bobbin_unit_label = tk.Label(frame, text='Units:')
-        bobbin_unit_label.grid(column=0, row=5)
+        label = tk.Label(frame, text='units:')
+        label.grid(column=0, row=5)
 
-        bobbin_unit_inputVar = tk.IntVar()
-        bobbin_unit_input = ttk.Combobox(frame, width=8, 
-            textvariable=bobbin_unit_inputVar, 
+        self.view_Bobbin['units'] = \
+            ttk.Combobox(frame, width=8, 
             values=['in.','mm.'],
             state='readonly')
-        bobbin_unit_input.grid(column=1, row=5)
+        self.view_Bobbin['units'].grid(column=1, row=5)
+        self.view_Bobbin['units'].set('in.')
 
-        bobbin_unit_input.set('in.')
+        self.checkButton = tk.Button(self, text='Check',
+            width=8)
+        self.checkButton.grid(column=0, row=11, columnspan=4)
 
-    def add_WindingsInput(self, frame):
+    def add_WindingsHeader(self, frame):
 
         winding_name = tk.Label(frame, text='Name', 
             fg='white', bg='grey', width=10)
@@ -153,17 +127,13 @@ class View(tk.Toplevel):
             fg='white', bg='grey', width=10)
         winding_size.grid(column=3, row=0)
 
-        p = Winding()
-        p.add_named_winding(frame, 'p', 1)
-        self.windings.append(p)
+    def add_Winding(self, winding, row):
+        view_winding = {}
+        for i, key in enumerate(winding.windingParameters):
+            view_winding[key] = \
+                tk.Entry(self.windingsFrame, width=10, 
+                justify='right')
+            view_winding[key].grid(column=i, row=row)
 
-        s = Winding()
-        s.add_named_winding(frame, 's', 2)
-        self.windings.append(s)
-
-    def add_Winding(self):
-        n = Winding()
-        n.add_winding(self.windingsFrame, len(self.windings) + 1)
-        self.windings.append(n)
-
+        self.view_Windings.append(view_winding)
         
