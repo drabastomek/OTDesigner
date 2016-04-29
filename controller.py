@@ -6,7 +6,7 @@ class Controller:
         self.model = model.Model()
         self.view = view.View(root)
 
-        self.view.checkButton.config(command=self.check)
+        # self.view.checkButton.config(command=self.check)
 
         self.add_BobbinControl()
         
@@ -15,8 +15,8 @@ class Controller:
 
     def add_BobbinControl(self):
         for key in self.view.bobbinKeys:
-            self.model.model_bobbin[key] \
-                .addCallback(self.valueChanged)
+            self.model.model_Bobbin[key] \
+                .addCallback(self.valueChanged_Bobbin)
 
             self.view.view_Bobbin[key].bind(
                 '<FocusOut>', 
@@ -30,8 +30,8 @@ class Controller:
                     self.update_Bobbin(event, k)    
             )
 
-            self.valueChanged(key, 
-                self.model.model_bobbin[key].get())
+            self.valueChanged_Bobbin(key, 
+                self.model.model_Bobbin[key].get())
 
         # units
         self.view.view_Bobbin['units'].bind(
@@ -40,14 +40,14 @@ class Controller:
                     self.update_Bobbin(event, k)   
         )
 
-        self.valueChanged('units', 
-            self.model.model_bobbin['units'].get())
+        self.valueChanged_Bobbin('units', 
+            self.model.model_Bobbin['units'].get())
 
     def update_Bobbin(self, even, key):
         self.model.setBobbinValue(key, 
             self.view.view_Bobbin[key].get())
 
-    def valueChanged(self, key, value):
+    def valueChanged_Bobbin(self, key, value):
         self.view.set_BobbinInput(key, value)
 
     def add_Winding(self):
