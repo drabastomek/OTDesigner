@@ -4,7 +4,7 @@ import view
 class Controller:
     def __init__(self, root):
         self.model = model.Model()
-        self.model.model_bobbin['width'].addCallback(self.valueChanged)
+        # self.model.model_bobbin['width'].addCallback(self.valueChanged)
 
         self.view = view.View(root)
 
@@ -32,7 +32,9 @@ class Controller:
                 self.model.model_bobbin[key].get())
 
         self.view.view_bobbin['units'].bind(
-            '<<ComboboxSelected>>', self.update_BobbinUnits   
+            '<<ComboboxSelected>>', 
+            lambda event, k='units':
+                    self.update_Bobbin(event, k)   
         )
 
         self.valueChanged('units', 
@@ -40,7 +42,6 @@ class Controller:
         
     def check(self):
         self.model.getBobbinValues()
-        # print('checked')
 
     def update_Bobbin(self, even, key):
         self.model.setBobbinValue(key, 
