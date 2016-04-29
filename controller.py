@@ -16,13 +16,13 @@ class Controller:
             self.model.model_bobbin[key] \
                 .addCallback(self.valueChanged)
 
-            self.view.view_bobbin[key].bind(
+            self.view.view_Bobbin[key].bind(
                 '<FocusOut>', 
                 lambda event, k=key:
                     self.update_Bobbin(event, k)    
             )
 
-            self.view.view_bobbin[key].bind(
+            self.view.view_Bobbin[key].bind(
                 '<Return>',  
                 lambda event, k=key:
                     self.update_Bobbin(event, k)    
@@ -31,7 +31,7 @@ class Controller:
             self.valueChanged(key, 
                 self.model.model_bobbin[key].get())
 
-        self.view.view_bobbin['units'].bind(
+        self.view.view_Bobbin['units'].bind(
             '<<ComboboxSelected>>', 
             lambda event, k='units':
                     self.update_Bobbin(event, k)   
@@ -45,10 +45,10 @@ class Controller:
 
     def update_Bobbin(self, even, key):
         self.model.setBobbinValue(key, 
-            self.view.view_bobbin[key].get())
+            self.view.view_Bobbin[key].get())
 
     def valueChanged(self, key, value):
-        self.view.set_bobbinInput(key, value)
+        self.view.set_BobbinInput(key, value)
 
     def add_Winding(self):
         n = Winding()

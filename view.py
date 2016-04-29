@@ -54,7 +54,7 @@ class View(tk.Toplevel):
 
         self.bobbinKeys = ['width', 'height', 'depth', 'lip']
 
-        self.view_bobbin = {            
+        self.view_Bobbin = {            
             'width': None, 
             'height': None, 
             'depth': None, 
@@ -89,30 +89,30 @@ class View(tk.Toplevel):
         #     )
         # self.windings_button.grid(column=0,row=4, columnspan=4)
 
-    def set_bobbinInput(self, key, value):
-        self.view_bobbin[key].delete(0,'end')
-        self.view_bobbin[key].insert('end', str(value))  
+    def set_BobbinInput(self, key, value):
+        self.view_Bobbin[key].delete(0,'end')
+        self.view_Bobbin[key].insert('end', str(value))  
 
     def add_BobbinInput(self, frame):
         for i, key in enumerate(self.bobbinKeys):
             label = tk.Label(frame, text=key)
             label.grid(column=0, row=i, sticky='ew')
 
-            self.view_bobbin[key] = \
+            self.view_Bobbin[key] = \
                 tk.Entry(frame, width=11, 
                 justify='right')
-            self.view_bobbin[key].grid(column=1, row=i)
+            self.view_Bobbin[key].grid(column=1, row=i)
 
         # units
         label = tk.Label(frame, text='units:')
         label.grid(column=0, row=5)
 
-        self.view_bobbin['units'] = \
+        self.view_Bobbin['units'] = \
             ttk.Combobox(frame, width=8, 
             values=['in.','mm.'],
             state='readonly')
-        self.view_bobbin['units'].grid(column=1, row=5)
-        self.view_bobbin['units'].set('in.')
+        self.view_Bobbin['units'].grid(column=1, row=5)
+        self.view_Bobbin['units'].set('in.')
 
         self.checkButton = tk.Button(self, text='Check',
             width=8)
