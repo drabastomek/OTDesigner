@@ -18,6 +18,4 @@ class Model:
 
         for key in self.model_bobbin:
             outStr.append('{0}: {1}'.format(key, self.model_bobbin[key].get()))
-        # print(self.model_bobbin['width'].get())
         print(', '.join(outStr))
-        # print('{0}'.format('width'))

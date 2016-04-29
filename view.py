@@ -71,11 +71,11 @@ class View(tk.Toplevel):
         self.add_BobbinInput(self.bobbinFrame)
         self.bobbinFrame.grid(column=0, row=0)
         
-        # # add bobbin dimensions image
-        # self.bobbinImageCanvas = tk.Canvas(self, 
-        #     height=250, width=250)
-        # # >>> add the image here!!! <<<
-        # self.bobbinImageCanvas.grid(column=1, row=0)
+        # add bobbin dimensions image
+        self.bobbinImageCanvas = tk.Canvas(self, 
+            height=250, width=250)
+        # >>> add the image here!!! <<<
+        self.bobbinImageCanvas.grid(column=1, row=0)
 
         # # add windings data
         # self.windingsFrame = tk.LabelFrame(self,
