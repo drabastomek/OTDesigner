@@ -12,14 +12,6 @@ class Winding(object):
         for w in self.windingParameters[1:]:
             self.params[w] = ob.Observable(w, 0)
 
-    # @staticmethod
-    # def getWindingParameters():
-    #     windingParameters = [
-    #         'name', 'turns', 'layers', 'awg'
-    #     ]
-
-    #     return windingParameters
-
 class Model:
     def __init__(self):
         self.model_Bobbin = {
@@ -46,10 +38,22 @@ class Model:
         w = Winding()
         self.model_Windings.append(w)
         return (self.model_Windings[-1], 
-            len(self.model_Windings) - 1)
+            len(self.model_Windings))
 
     def get_Winding(self, index):
         return self.model_Windings[index]
 
     def set_WindingValue(self, index, key, value):
         self.model_Windings[index].params[key].set(value)
+
+    def getWindingsValues(self):
+
+        for i, winding in enumerate(self.model_Windings):
+            outStr = []
+
+            for key in winding.windingParameters:
+                # print(i, winding.params[key].get())
+                outStr.append('{0}: {1}'.format(key, 
+                    winding.params[key].get()))
+
+            print('Winding {0}: '.format(i) + ', '.join(outStr))

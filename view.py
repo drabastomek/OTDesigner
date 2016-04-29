@@ -105,9 +105,9 @@ class View(tk.Toplevel):
         self.view_Bobbin['units'].grid(column=1, row=5)
         self.view_Bobbin['units'].set('in.')
 
-        # self.checkButton = tk.Button(self, text='Check',
-        #     width=8)
-        # self.checkButton.grid(column=0, row=6)
+        self.checkButton = tk.Button(self, text='Check',
+            width=8)
+        self.checkButton.grid(column=0, row=11, columnspan=4)
 
     def add_WindingsHeader(self, frame):
 
@@ -134,4 +134,6 @@ class View(tk.Toplevel):
                 tk.Entry(self.windingsFrame, width=10, 
                 justify='right')
             view_winding[key].grid(column=i, row=row)
+
+        self.view_Windings.append(view_winding)
         
