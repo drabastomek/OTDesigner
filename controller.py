@@ -8,6 +8,9 @@ class Controller:
 
         # self.view.checkButton.config(command=self.check)
 
+        self.view.windings_button.config(
+            command=self.add_Winding)
+
         self.add_BobbinControl()
         
     def check(self):
@@ -51,6 +54,13 @@ class Controller:
         self.view.set_BobbinInput(key, value)
 
     def add_Winding(self):
-        n = Winding()
-        n.add_winding(self.windingsFrame, len(self.windings) + 1)
-        self.windings.append(n)
+        winding, row = self.model.add_Winding()
+
+        self.view.add_Winding(winding, row+1)
+        
+    def buttonTest(self):
+        print('Testing')
+    # def add_Winding(self):
+    #     n = Winding()
+    #     n.add_winding(self.windingsFrame, len(self.windings) + 1)
+    #     self.windings.append(n)
