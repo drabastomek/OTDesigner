@@ -52,7 +52,6 @@ class Model:
             outStr = []
 
             for key in winding.windingParameters:
-                # print(i, winding.params[key].get())
                 outStr.append('{0}: {1}'.format(key, 
                     winding.params[key].get()))
 
